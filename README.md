@@ -14,3 +14,6 @@ Here are some of the project's best features:
 
 *   Password Hashing
 *   Personalized log viewer
+
+
+![flask](https://github.com/user-attachments/assets/7f50fd9d-be94-44b8-b0d0-e40581d40853)
