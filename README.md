@@ -6,7 +6,7 @@
 
 <h2>Introduction</h2>
 
-This a farm management system where users can register as farmers and list their products enabling customers to see the various products listed by different farmers eliminating the involvement of middlemen.
+This is a farm management system where users can register as farmers and list their products enabling customers to see the various products listed by different farmers eliminating the involvement of middlemen.
   
 <h2>🧐 Features</h2>
 
