@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Farmer Details
+{% endblock title %}
+
+{% block body %}
+<h3 class="text-center"><span>Farmer Details</span></h3>
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<br>
+
+<div class="container mt-3">
+    <!-- Filter Form -->
+    <form method="GET" action="{{ url_for('farmerdetails') }}" class="mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <select name="division" class="form-select" onchange="this.form.submit()">
+                    <option value="" selected>-- Select Division --</option>
+                    {% for division in divisions %}
+                        <option value="{{ division }}" {% if request.args.get('division') == division %}selected{% endif %}>
+                            {{ division }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+
+    {% if query %}
+        <div class="row justify-content-center">
+            {% for post in query %}
+            <div class="col-md-6 mb-4">
+                <div class="card text-center">
+                    <!-- Profile Picture -->
+                    <div class="card-header">
+                        {% if post.profile_picture %}
+                            <!-- Thumbnail Image, clicking opens in Modal -->
+                            <img 
+                                src="{{ url_for('static', filename='uploads/profile_pictures/' + post.profile_picture) }}" 
+                                alt="Profile Picture" 
+                                style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 3px solid #ddd;"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#profilePictureModal{{ post.rid }}">
+                        {% else %}
+                            <span>No Image</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Farmer Details -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.farmername }}</h5>
+                        
+                        <p><strong>Number:</strong> {{ post.number }}</p>
+                        <p><strong>Age:</strong> {{ post.age }}</p>
+                        <p><strong>Gender:</strong> {{ post.gender }}</p>
+                        <p><strong>Phone:</strong> {{ post.phonenumber }}</p>
+                        <p><strong>Address:</strong> {{ post.address }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Enlarged Image -->
+            <div class="modal fade" id="profilePictureModal{{ post.rid }}" tabindex="-1" aria-labelledby="profilePictureModalLabel{{ post.rid }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img 
+                                src="{{ url_for('static', filename='uploads/profile_pictures/' + post.profile_picture) }}" 
+                                alt="Enlarged Profile Picture" 
+                                class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1 class="text-center">No farmer details found. Register first.</h1>
+    {% endif %}
+</div>
+
+{% endblock body %}

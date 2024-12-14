@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Farmer Profile
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg rounded border-0">
+        <!-- Card Header -->
+        <div class="card-header bg-success text-white text-center rounded-top">
+          <h4 class="mb-0">Edit Farmer Profile</h4>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body px-5 py-4">
+          <!-- Flash Messages -->
+          {% with messages=get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          <!-- Form Start -->
+          <form action="/edit_farmer_profile/{{ farmer.rid }}" method="POST" enctype="multipart/form-data">
+            <!-- Farmer Name -->
+            <div class="form-group">
+              <label for="farmername" class="font-weight-bold">Farmer Name</label>
+              <input type="text" class="form-control rounded-pill" name="farmername" id="farmername" value="{{ farmer.farmername }}" required>
+            </div>
+
+            <!-- Number -->
+            <div class="form-group">
+              <label for="number" class="font-weight-bold">Number</label>
+              <input type="text" class="form-control rounded-pill" name="number" id="number" value="{{ farmer.number }}" required>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+              <label for="age" class="font-weight-bold">Age</label>
+              <input type="number" class="form-control rounded-pill" name="age" id="age" value="{{ farmer.age }}" required>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+              <label for="gender" class="font-weight-bold">Gender</label>
+              <select class="form-control rounded-pill" id="gender" name="gender" required>
+                <option value="male" {% if farmer.gender == 'male' %}selected{% endif %}>Male</option>
+                <option value="female" {% if farmer.gender == 'female' %}selected{% endif %}>Female</option>
+              </select>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label for="phonenumber" class="font-weight-bold">Phone Number</label>
+              <input type="text" class="form-control rounded-pill" name="phonenumber" id="phonenumber" value="{{ farmer.phonenumber }}" required>
+            </div>
+
+            <!-- Address as Dropdown for Divisions -->
+            <div class="form-group">
+              <label for="address" class="font-weight-bold">Address</label>
+              <select class="form-control rounded-pill" name="address" id="address" required>
+                <option selected>Select Division</option>
+                <option value="Dhaka" {% if farmer.address == 'Dhaka' %}selected{% endif %}>Dhaka</option>
+                <option value="Chittagong" {% if farmer.address == 'Chittagong' %}selected{% endif %}>Chittagong</option>
+                <option value="Khulna" {% if farmer.address == 'Khulna' %}selected{% endif %}>Khulna</option>
+                <option value="Rajshahi" {% if farmer.address == 'Rajshahi' %}selected{% endif %}>Rajshahi</option>
+                <option value="Barisal" {% if farmer.address == 'Barisal' %}selected{% endif %}>Barisal</option>
+                <option value="Sylhet" {% if farmer.address == 'Sylhet' %}selected{% endif %}>Sylhet</option>
+                <option value="Rangpur" {% if farmer.address == 'Rangpur' %}selected{% endif %}>Rangpur</option>
+                <option value="Mymensingh" {% if farmer.address == 'Mymensingh' %}selected{% endif %}>Mymensingh</option>
+              </select>
+            </div>
+
+            <!-- Current Profile Picture -->
+            <div class="form-group text-center">
+              <label class="font-weight-bold d-block">Current Profile Picture</label>
+              {% if farmer.profile_picture %}
+                <img src="{{ url_for('static', filename='uploads/profile_pictures/' + farmer.profile_picture) }}" 
+                     alt="Profile Picture" class="img-thumbnail rounded-circle shadow" style="width: 120px; height: 120px;">
+              {% else %}
+                <p class="text-muted">No profile picture uploaded</p>
+              {% endif %}
+            </div>
+
+            <!-- Upload New Profile Picture -->
+            <div class="form-group">
+              <label for="profile_picture" class="font-weight-bold">Upload New Profile Picture</label>
+              <input type="file" class="form-control-file" name="profile_picture" id="profile_picture">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm">
+                Update Profile
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

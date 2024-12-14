@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Farmers by Division{% endblock %}
+
+{% block style %}
+<style>
+    .card-highlight-max {
+        background-color: #f8f9fa;
+        border: 3px solid #28a745; /* Green border for max */
+    }
+    .card-highlight-min {
+        background-color: #f8f9fa;
+        border: 3px solid #dc3545; /* Red border for min */
+    }
+    .card-neutral {
+        background-color: #ffffff; /* Neutral background for other cards */
+        border: 1px solid #dee2e6; /* Default border */
+    }
+</style>
+{% endblock style %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Farmers by Division</h2>
+
+    <!-- Display maximum and minimum division with improved aesthetics -->
+    <div class="row mb-4">
+        <!-- Division with Maximum Farmers -->
+        <div class="col-md-6">
+            <h4 class="text-center mb-3">Division with Maximum Farmers</h4>
+            {% if max_division %}
+                <div class="card card-highlight-max mb-3 shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ max_division[0] }}</h5>
+                        <p class="card-text">Number of Farmers: <strong>{{ max_division[1] }}</strong></p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center">No data available.</p>
+            {% endif %}
+        </div>
+
+        <!-- Division with Minimum Farmers -->
+        <div class="col-md-6">
+            <h4 class="text-center mb-3">Division with Minimum Farmers</h4>
+            {% if min_division %}
+                <div class="card card-highlight-min mb-3 shadow-lg">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ min_division[0] }}</h5>
+                        <p class="card-text">Number of Farmers: <strong>{{ min_division[1] }}</strong></p>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center">No data available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Display all divisions in styled cards -->
+    <h4 class="mt-5 text-center">All Divisions</h4>
+    <div class="row">
+        {% for division, num_farmers in division_counts.items() %}
+            <div class="col-md-4 mb-4">
+                <div class="card card-neutral shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ division }}</h5>
+                        <p class="card-text">Number of Farmers: <strong>{{ num_farmers }}</strong></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
