@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/Abu-Ruhan-Mahamud/DBMS-Project-Farm-Management-System/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 
-<p id="description">A Database Management System Project for course 414</p>
+<p id="description">A Database Management System Project for course 414.</p>
 
 <h2>Introduction</h2>
 
@@ -10,10 +10,21 @@ This is a farm management system where users can register as farmers and list th
   
 <h2>🧐 Features</h2>
 
-Here are some of the project's best features:
+Here're some of the project's best features:
 
 *   Password Hashing
 *   Personalized log viewer
 
+  
+  
+<h2>💻 Built with</h2>
 
-![flask](https://github.com/user-attachments/assets/7f50fd9d-be94-44b8-b0d0-e40581d40853)
+Technologies used in the project:
+
+*   Frontend: HTML CSS and JavaScript
+*   Backend: Python along with Flask
+*   Database: MySQL for data storage and management
+
+<h2>🛡️ License:</h2>
+
+This project is licensed under the MIT License
